@@ -6,10 +6,9 @@ exports.handler = async (event, context) => {
       { 
         headers: {
           "Accept": "application/json",
-          "Content-Type": "application/json" ,
+          "Content-Type": "application/json",
           "trakt-api-key": process.env.TTW_TRAKT_CLIENT_ID,
           "trakt-api-version": 2,
-
         } 
       })
     return {
