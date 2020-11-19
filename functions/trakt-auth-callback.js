@@ -9,7 +9,7 @@ exports.handler = async (event, context) => {
         "code": code,
         "client_id": process.env.TTW_TRAKT_CLIENT_ID,
         "client_secret": process.env.TTW_TRAKT_CLIENT_SECRET,
-        "redirect_uri": process.env.URL + "/.netlify/functions/auth-callback",
+        "redirect_uri": process.env.URL + "/.netlify/functions/trakt-auth-callback",
         "grant_type": "authorization_code"
       },
       { 

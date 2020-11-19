@@ -4,8 +4,8 @@ exports.handler = async (event, context) => {
       "https://api.trakt.tv/oauth/authorize" +
       "?response_type=code" +
       "&client_id=" + process.env.TTW_TRAKT_CLIENT_ID +
-      "&redirect_uri=" + process.env.URL + "/.netlify/functions/auth-callback"
-    console.log(location)
+      "&redirect_uri=" + process.env.URL + "/.netlify/functions/trakt-auth-callback"
+
     return {
       statusCode: 302,
       headers: {
