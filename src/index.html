@@ -11,7 +11,9 @@
 				<p>Display films that are no longer than the chosen length in minutes</p>
 			</div>
 
-			<form action="listing" method="GET">
+			<form name="search" method="POST" netlify>
+				<input type="hidden" name="form-name" value="search">
+
 				<div class="mt-5 sm:flex sm:items-center">
 					<div class="w-full max-w-xs">
 						<label for="runtime" class="sr-only">Runtime</label>
