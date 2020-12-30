@@ -3,3 +3,5 @@ _site/
 node_modules/
 src/assets/css/tailwind.css
 .netlify/
+# Local Netlify folder
+.netlify
