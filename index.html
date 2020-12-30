@@ -11,9 +11,7 @@
 				<p>Display films that are no longer than the chosen length in minutes</p>
 			</div>
 
-			<form name="search" method="POST" action="/listing" netlify>
-				<input type="hidden" name="form-name" value="search">
-
+			<form id="search" x-data="{runtime:''}" @submit.prevent="submitMessage();">
 				<div class="mt-5 sm:flex sm:items-center">
 					<div class="w-full max-w-xs">
 						<label for="runtime" class="sr-only">Runtime</label>
@@ -34,3 +32,32 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	function submitMessage() {
+		let formElement = document.getElementById( 'search' );
+		let body = new URLSearchParams( new FormData( formElement ) ).toString();
+
+		return fetch( '/.netlify/functions/listing', {
+			method: 'POST'
+			,headers: {
+				'Content-Type': 'application/x-www-form-urlencoded'
+			}
+			,body: body
+		} )
+			.then( ( response ) => {
+				if ( response.ok ) {
+					formElement.reset();
+
+// https://developer.mozilla.org/en-US/docs/Web/API/Body/json
+					return response.json();
+				} else {
+					throw new Error( `Something went wrong: ${response.statusText}` );
+				}
+			} )
+			.then( function( data ) {
+				return data;
+			} )
+			.catch( ( error ) => console.error( error ) );
+	}
+</script>
