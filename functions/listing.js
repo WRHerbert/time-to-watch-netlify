@@ -2,14 +2,15 @@ axios = require( 'axios' );
 
 exports.handler = async ( event, context ) => {
 	try {
-		const runtime = event.queryStringParameters.runtime;
-		const response = await axios.get( 'https://api.trakt.tv/movies/trending',
+// PoC: use runtime minutes as limit to the number of records returned
+		const runtime = event.body;
+		const response = await axios.get( 'https://api.trakt.tv/movies/trending?limit=' + runtime,
 			{
 				headers: {
 					"Accept": "application/json",
 					"Content-Type": "application/json",
 					"trakt-api-key": process.env.TTW_TRAKT_CLIENT_ID,
-					"trakt-api-version": 2,
+					"trakt-api-version": 2
 				}
 			}
 		)
@@ -22,8 +23,8 @@ exports.handler = async ( event, context ) => {
 		console.log( error );
 
 		return {
-		statusCode: 500,
-		body: JSON.stringify( { message: error.message } )
+			statusCode: 500,
+			body: JSON.stringify( { message: error.message } )
 		}
 	}
 }
