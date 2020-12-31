@@ -11,6 +11,7 @@
 				<p>Display films that are no longer than the chosen length in minutes</p>
 			</div>
 
+			<!-- <div id="search" x-data="method1()" x-init="method2()"> -->
 			<div id="search" x-data="method1()">
 				<div class="mt-5 sm:flex sm:items-center">
 					<div class="w-full max-w-xs">
@@ -29,7 +30,7 @@
 					</span>
 				</div>
 
-				<template x-if="movies"><div>here</div></template>
+				<template x-if="displayMovies"><div>Here</div></template>
 			</div>
 		</div>
 	</div>
@@ -38,7 +39,7 @@
 <script type="text/javascript">
 	function method1() {
 		return {
-			movies: null,
+			displayMovies: false,
 			runtime: '',
 			method2() {
 				fetch( '/.netlify/functions/listing', {
@@ -57,7 +58,8 @@
 						}
 					} )
 					.then( ( data ) => {
-						this.movies = data;
+						this.displayMovies = true;
+						// this.movies = data;
 					} )
 					.catch( ( error ) => console.error( error ) );
 			}
