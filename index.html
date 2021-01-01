@@ -30,7 +30,27 @@
 					</span>
 				</div>
 
-				<template x-if="displayMovies"><div>Here</div></template>
+				<template x-if="displayMovies">
+					<table class="table-auto w-full mt-5">
+						<thead>
+							<tr>
+								<th class="px-4 py-2 text-left">ID</th>
+								<th class="px-4 py-2 text-left">Title</th>
+								<th class="px-4 py-2 text-left">Year</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<template x-for="record in records">
+								<tr>
+									<td class="border px-4 py-2 align-top" x-text="record.movie.ids.trakt"></td>
+									<td class="border px-4 py-2 align-top" x-text="record.movie.title"></td>
+									<td class="border px-4 py-2 align-top" x-text="record.movie.year"></td>
+								</tr>
+							</template>
+						</tbody>
+					</table>
+				</template>
 			</div>
 		</div>
 	</div>
@@ -40,6 +60,7 @@
 	function method1() {
 		return {
 			displayMovies: false,
+			records: [],
 			runtime: '',
 			method2() {
 				fetch( '/.netlify/functions/listing', {
@@ -59,7 +80,7 @@
 					} )
 					.then( ( data ) => {
 						this.displayMovies = true;
-						// this.movies = data;
+						this.records = data.records;
 					} )
 					.catch( ( error ) => console.error( error ) );
 			}
