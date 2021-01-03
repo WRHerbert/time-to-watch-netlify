@@ -17,9 +17,21 @@ exports.handler = async (event, context) => {
           "Content-Type": "application/json",
         } 
       })
+
+    const location = '/'
+    const accessToken = 
+      `trakt_access_token=${response.data.access_token};` +
+      `Max-Age=${response.data.expires_in};` +
+      `Secure;` +
+      `HttpOnly;` +
+      `SameSite=Strict;`
+
     return {
-      statusCode: 200,
-      body: JSON.stringify({ msg: response.data })
+      statusCode: 302,
+      headers: {
+        Location: location,
+        "Set-Cookie": accessToken
+      }
     }
 
   } catch (err) {
