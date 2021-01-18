@@ -28,6 +28,13 @@
 							Search
 						</button>
 					</span>
+
+					<span class="inline-flex mt-3 rounded-md shadow-sm sm:mt-0 sm:ml-3 sm:w-auto">
+						<button type="button" @click="login()"
+							class="inline-flex items-center justify-center w-full px-4 py-2 font-medium text-white transition duration-150 ease-in-out bg-green-600 border border-transparent rounded-md hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-700 sm:w-auto sm:text-sm sm:leading-5">
+							Login
+						</button>
+					</span>
 				</div>
 
 				<template x-if="displayMovies">
@@ -85,5 +92,53 @@
 					.catch( ( error ) => console.error( error ) );
 			}
 		}
+	}
+
+	function login() {
+		// alert('login');
+		const axios = require("axios");
+
+
+		fetch( '/.netlify/functions/trakt-auth', {
+			method: 'GET'
+			,headers: {
+				// 'Content-Type': 'application/json',
+				// 'Access-Control-Allow-Headers': 'Access-Control-Allow-Origin,Origin',
+				'Access-Control-Allow-Origin': 'http://localhost:8888'
+
+				// "Origin": "http://localhost:8888",
+				// "Access-Control-Allow-Origin": "*"
+
+
+			// 'Access-Control-Allow-Origin': 'https://api.trakt.tv'
+			}
+			// ,mode: 'cors'
+		} )
+			.then( ( response ) => {
+
+
+console.log(response);
+
+				if ( response.ok ) {
+// https://developer.mozilla.org/en-US/docs/Web/API/Body/json
+					return response.json();
+				} else {
+					throw new Error( `Something went wrong: ${response.statusText}` );
+				}
+			} )
+			.then( ( data ) => {
+				this.displayMovies = true;
+				this.records = data.records;
+			} )
+			.catch( ( error ) => console.log( error ) );
+
+
+
+
+
+		// alert('login 2');
+
+
+
 	}
 </script>

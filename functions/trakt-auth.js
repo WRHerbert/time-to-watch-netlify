@@ -11,7 +11,9 @@ exports.handler = async (event, context) => {
       headers: {
         Location: location,
         "Content-Type": "application/json",
-        "Cache-Control": "no-cache"
+        "Cache-Control": "no-cache",
+        // 'Access-Control-Allow-Headers': 'access-control-allow-origin',
+        // 'Access-Control-Allow-Origin': 'http://localhost:8888'
       }
     }
 
