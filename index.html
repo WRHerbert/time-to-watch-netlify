@@ -43,6 +43,7 @@
 							<tr>
 								<th class="px-4 py-2 text-left">ID</th>
 								<th class="px-4 py-2 text-left">Title</th>
+								<th class="px-4 py-2 text-left">Runtime (mins)</th>
 								<th class="px-4 py-2 text-left">Year</th>
 							</tr>
 						</thead>
@@ -52,6 +53,7 @@
 								<tr>
 									<td class="border px-4 py-2 align-top" x-text="record.movie.ids.trakt"></td>
 									<td class="border px-4 py-2 align-top" x-text="record.movie.title"></td>
+									<td class="border px-4 py-2 align-top text-right" x-text="record.movie.runtime"></td>
 									<td class="border px-4 py-2 align-top" x-text="record.movie.year"></td>
 								</tr>
 							</template>
@@ -78,6 +80,9 @@
 					,body: this.runtime
 				} )
 					.then( ( response ) => {
+
+// console.log(response);
+
 						if ( response.ok ) {
 // https://developer.mozilla.org/en-US/docs/Web/API/Body/json
 							return response.json();
