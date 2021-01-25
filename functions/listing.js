@@ -3,8 +3,12 @@ axios = require( 'axios' );
 exports.handler = async ( event, context ) => {
 	try {
 // PoC: use runtime minutes as limit to the number of records returned
-		const runtime = event.body;
-		const response = await axios.get( 'https://api.trakt.tv/movies/trending?limit=' + runtime,
+		const runtime = Number( event.body );
+
+		const runFrom = runtime - 10;
+		const runTo = runtime + 10;
+
+		const response = await axios.get( `https://api.trakt.tv/movies/trending?extended=full&runtimes=${runFrom}-${runTo}`,
 			{
 				headers: {
 					"Accept": "application/json",
